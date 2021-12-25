@@ -238,6 +238,8 @@ PackageTests()
     local framework="$1"
     local runtime="$2"
 
+    ProgressStart 'Creating Test Package'
+
     cp test.sh "$testPackageFolder/$framework/$runtime/publish"
 
     rm -f $testPackageFolder/$framework/$runtime/*.log.config
