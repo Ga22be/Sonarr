@@ -275,7 +275,7 @@ UploadArtifacts()
         local runtime=$(basename "$dir")
         local extension="tar.gz"
 
-        if [[ "$runtime" =~ -win|-app ]]; then
+        if [[ "$runtime" =~ win-|-app ]]; then
             extension="zip"
         fi
 
