@@ -257,7 +257,7 @@ UploadTestArtifacts()
     for dir in $testPackageFolder/$framework/*
     do
         local runtime=$(basename "$dir")
-        echo "##teamcity[publishArtifacts '$testPackageFolder/$runtime/publish/** => tests.$runtime.zip']"
+        echo "##teamcity[publishArtifacts '$testPackageFolder/$framework/$runtime/publish/** => tests.$runtime.zip']"
     done
     
     ProgressEnd 'Publishing Test Artifacts'
