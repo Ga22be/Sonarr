@@ -254,10 +254,10 @@ UploadTestArtifacts()
     ProgressStart 'Publishing Test Artifacts'
 
     # Tests
-    for dir in $testPackageFolder/*
+    for dir in $testPackageFolder/$framework/*
     do
         local runtime=$(basename "$dir")
-        echo "##teamcity[publishArtifacts '$artifactsFolder/$runtime/$framework/publish/** => tests.$runtime.zip']"
+        echo "##teamcity[publishArtifacts '$testPackageFolder/$runtime/publish/** => tests.$runtime.zip']"
     done
     
     ProgressEnd 'Publishing Test Artifacts'
@@ -273,7 +273,13 @@ UploadArtifacts()
     for dir in $artifactsFolder/*
     do
         local runtime=$(basename "$dir")
-        echo "##teamcity[publishArtifacts '$artifactsFolder/$runtime/$framework/** => Sonarr.$BRANCH.$BUILD_NUMBER.$runtime.zip']"
+        local extension="tar.gz"
+
+        if [[ "$runtime" =~ -win|-app ]]; then
+            extension="zip"
+        fi
+
+        echo "##teamcity[publishArtifacts '$artifactsFolder/$runtime/$framework/** => Sonarr.$BRANCH.$BUILD_NUMBER.$runtime.$extension']"
     done
 
     # Debian Package
