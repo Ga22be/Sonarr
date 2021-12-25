@@ -226,7 +226,7 @@ Package()
         win)
             PackageWindows "$framework" "$runtime"
             ;;
-        macos)
+        osx)
             PackageMacOS "$framework" "$runtime"
             PackageMacOSApp "$framework" "$runtime"
             ;;
@@ -369,7 +369,7 @@ then
         PackageTests "net6.0" "win-x86"
         PackageTests "net6.0" "linux-x64"
         PackageTests "net6.0" "linux-musl-x64"
-        PackageTests "net6.0" "macos-x64"
+        PackageTests "net6.0" "osx-x64"
         if [ "$ENABLE_BSD" = "YES" ];
         then
             PackageTests "net6.0" "freebsd-x64"
@@ -410,8 +410,8 @@ then
         Package "net6.0" "linux-arm64"
         Package "net6.0" "linux-musl-arm64"
         Package "net6.0" "linux-arm"
-        Package "net6.0" "macos-x64"
-        Package "net6.0" "macos-arm64"
+        Package "net6.0" "osx-x64"
+        Package "net6.0" "osx-arm64"
         if [ "$ENABLE_BSD" = "YES" ];
         then
             Package "net6.0" "freebsd-x64"
