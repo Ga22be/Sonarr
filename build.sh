@@ -25,7 +25,7 @@ UpdateVersionNumber()
         echo "Updating Version Info"
         sed -i'' -e "s/<AssemblyVersion>[0-9.*]\+<\/AssemblyVersion>/<AssemblyVersion>$SONARRVERSION<\/AssemblyVersion>/g" src/Directory.Build.props
         sed -i'' -e "s/<AssemblyConfiguration>[\$()A-Za-z-]\+<\/AssemblyConfiguration>/<AssemblyConfiguration>${BUILD_SOURCEBRANCHNAME}<\/AssemblyConfiguration>/g" src/Directory.Build.props
-        sed -i'' -e "s/<string>10.0.0.0<\/string>/<string>$SONARRVERSION<\/string>/g" distribution/osx/Sonarr.app/Contents/Info.plist
+        sed -i'' -e "s/<string>10.0.0.0<\/string>/<string>$SONARRVERSION<\/string>/g" distribution/macOS/Sonarr.app/Contents/Info.plist
     fi
 }
 
@@ -176,7 +176,7 @@ PackageMacOSApp()
 
     rm -rf $folder
     mkdir -p $folder
-    cp -r distribution/osx/Sonarr.app $folder
+    cp -r distribution/macOS/Sonarr.app $folder
     mkdir -p $folder/Sonarr.app/Contents/MacOS
 
     echo "Copying Binaries"
@@ -226,7 +226,7 @@ Package()
         win)
             PackageWindows "$framework" "$runtime"
             ;;
-        osx)
+        macos)
             PackageMacOS "$framework" "$runtime"
             PackageMacOSApp "$framework" "$runtime"
             ;;
@@ -371,8 +371,8 @@ then
         Package "net6.0" "linux-arm64"
         Package "net6.0" "linux-musl-arm64"
         Package "net6.0" "linux-arm"
-        Package "net6.0" "osx-x64"
-        Package "net6.0" "osx-arm64"
+        Package "net6.0" "macos-x64"
+        Package "net6.0" "macos-arm64"
         if [ "$ENABLE_BSD" = "YES" ];
         then
             Package "net6.0" "freebsd-x64"
